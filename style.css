@@ -1,0 +1,15 @@
+:root {
+    --square-size: 200px;
+}
+
+#gameboard-container {
+    display: grid;
+    grid-template-columns: repeat(3, var(--square-size));
+    grid-auto-rows: var(--square-size);
+    /* justify-content: center; */
+}
+
+.gameboard-square {
+    border: solid black 1px;
+    margin: 0 -1px -1px 0;
+}
