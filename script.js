@@ -3,7 +3,9 @@ const gameboardSquares = document.querySelectorAll(".gameboard-square");
 
 const gameboard = (() => {
 
-    let gameboardInput = ['X', 'X', 'X', 'O', 'O', 'O', 'Y', 'Y', 'Y'];
+    // let gameboardInput = ['X', 'X', 'X', 'O', 'O', 'O', 'Y', 'Y', 'Y'];
+
+    let gameboardInput = [];
 
     return {
         gameboardInput
@@ -14,11 +16,14 @@ const gameboard = (() => {
 
 const Player = (name, symbol) => {
 
+    const takeTurn = (e) => {
+        console.log(e.target.id);
+        e.target.textContent = 'X';
 
-
+    }
 
     return {
-
+        takeTurn
     };
 
 
@@ -39,4 +44,10 @@ const displayController = (() => {
 
 })();
 
+const player1 = Player('Caylin', 'X');
+
 displayController.displayGameboard(gameboard.gameboardInput);
+
+gameboardSquares.forEach((square) => {
+    square.addEventListener('click', player1.takeTurn);
+});
