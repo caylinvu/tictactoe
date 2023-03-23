@@ -10,3 +10,16 @@ const gameboard = (() => {
 
 
 })();
+
+const Player = (name, symbol) => {
+
+
+
+
+    return {
+
+    };
+
+
+};
+
