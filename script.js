@@ -3,9 +3,15 @@ const gameboardSquares = document.querySelectorAll(".gameboard-square");
 
 const gameboard = (() => {
 
-    // let gameboardInput = ['X', 'X', 'X', 'O', 'O', 'O', 'Y', 'Y', 'Y'];
+    // let input = ['X', 'X', 'X', 'O', 'O', 'O', 'Y', 'Y', 'Y'];
 
-    let gameboardInput = [];
+    let input = [];
+
+    const display = () => {
+        for (i = 0; i < input.length; i++) {
+            gameboardSquares[i].textContent = input[i];
+        }
+    };
 
     const winningConditions = [
         [0, 1, 2],
@@ -24,9 +30,9 @@ const gameboard = (() => {
         for (i = 0; i < winningConditions.length; i++) {
 
             const winCondition = winningConditions[i];
-            let a = gameboardInput[winCondition[0]];
-            let b = gameboardInput[winCondition[1]];
-            let c = gameboardInput[winCondition[2]];
+            let a = input[winCondition[0]];
+            let b = input[winCondition[1]];
+            let c = input[winCondition[2]];
 
             if ((a == b && b == c) && a) {
                 if (a == 'X') {
@@ -41,7 +47,7 @@ const gameboard = (() => {
     }
 
     return {
-        gameboardInput, checkWinner, winner
+        input, display, checkWinner, winner
     };
 
 
@@ -51,8 +57,8 @@ const Player = (symbol) => {
 
     const takeTurn = (e) => {
         let i = e.target.id;
-        gameboard.gameboardInput[i] = symbol;
-        displayController.displayGameboard(gameboard.gameboardInput);
+        gameboard.input[i] = symbol;
+        gameboard.display();
     };
 
     return {
@@ -62,16 +68,16 @@ const Player = (symbol) => {
 
 };
 
-const displayController = (() => {
+const game = (() => {
 
-    const displayGameboard = (gameboardArray) => {
-        for (i = 0; i < gameboardArray.length; i++) {
-            gameboardSquares[i].textContent = gameboardArray[i];
-        }
-    };
+    // const displayGameboard = (gameboardArray) => {
+    //     for (i = 0; i < gameboardArray.length; i++) {
+    //         gameboardSquares[i].textContent = gameboardArray[i];
+    //     }
+    // };
     
     let turn = 1;
-    const togglePlayer = (e) => {
+    const play = (e) => {
         if (e.target.textContent) {
             return;
         }
@@ -88,7 +94,7 @@ const displayController = (() => {
     }
 
     return {
-        displayGameboard, togglePlayer
+        play
     };
 
 
@@ -97,21 +103,7 @@ const displayController = (() => {
 const player1 = Player('X');
 const player2 = Player('O');
 
-// displayController.displayGameboard(gameboard.gameboardInput);
-// let turn = 1;
-// gameboardSquares.forEach((square) => {
-//     square.addEventListener('click', (e) => {
-//         if (turn == 1) {
-//             player1.takeTurn(e);
-//             turn = 2;
-//         } else {
-//             player2.takeTurn(e);
-//             turn = 1;
-//         }
-//     });
-// });
-
 gameboardSquares.forEach((square) => {
-    square.addEventListener('click', displayController.togglePlayer);
+    square.addEventListener('click', game.play);
 });
 
