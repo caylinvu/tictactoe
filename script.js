@@ -2,6 +2,8 @@ const gameboardContainer = document.getElementById("gameboard-container");
 const gameboardSquares = document.querySelectorAll(".gameboard-square");
 const turnTxt = document.querySelector(".turn-txt");
 const winnerTxt = document.querySelector(".winner-txt");
+const restartBtn = document.querySelector(".restart-btn");
+let turn = 1;
 
 const gameboard = (() => {
 
@@ -15,6 +17,18 @@ const gameboard = (() => {
         }
     };
 
+    const restart = () => {
+        input.length = 0;
+        gameboardSquares.forEach((square) => {
+            square.textContent = '';
+        });
+
+        turnTxt.textContent = "It's player 1's turn! (X goes first)";
+        winnerTxt.textContent = '';
+        restartBtn.textContent = 'Restart Game';
+        turn = 1;
+    };
+
     const winningConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -24,7 +38,7 @@ const gameboard = (() => {
         [2, 5, 8],
         [0, 4, 8],
         [2, 4, 6]
-    ]
+    ];
 
     const checkWinner = () => {
         for (i = 0; i < winningConditions.length; i++) {
@@ -36,6 +50,7 @@ const gameboard = (() => {
 
             if ((a == b && b == c) && a) {
                 turnTxt.textContent = 'Congrats!';
+                restartBtn.textContent = 'New Game';
                 if (a == 'X') {
                     return 'Player 1 wins!!!';
                 } else {
@@ -46,12 +61,13 @@ const gameboard = (() => {
 
         if (input.length == 9 && !input.includes(undefined)) {
             turnTxt.textContent = 'Bummer!';
+            restartBtn.textContent = 'New Game';
             return "It's a tie!!!";
         }
-    }
+    };
 
     return {
-        input, display, checkWinner
+        input, display, restart, checkWinner
     };
 
 
@@ -74,7 +90,7 @@ const Player = (symbol) => {
 
 const game = (() => {
 
-    let turn = 1;
+    // let turn = 1;
 
     const play = (e) => {
         if (e.target.textContent || winnerTxt.textContent) {
@@ -108,10 +124,10 @@ gameboardSquares.forEach((square) => {
     square.addEventListener('click', game.play);
 });
 
+restartBtn.addEventListener('click', gameboard.restart);
+
 // TO DO!!!!!
 
-// ADD UI TO SHOW WHOSE TURN IT IS
-
-// ADD BUTTON TO START NEW GAME
+// MAYBE MOVE RESRTART FUNCTION TO GAME MODULE AND PUT TURN DECLARATION BACK THERE
 
 // ADD AI

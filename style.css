@@ -15,10 +15,16 @@ body {
     font-family: 'Alkatra', sans-serif;
 }
 
+button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
 .title {
     font-size: 80px;
-    padding: 40px 0 10px;
-/*     text-shadow: 5px 5px var(--peach); */
+    padding-top: 30px;
+    text-shadow: 5px 5px 10px var(--peach);
 }
 
 #gameboard-container {
@@ -37,13 +43,28 @@ body {
     align-items: center;
     font-size: 60px;
     color: var(--medium-teal);
+    border-radius: 10px;
 }
 
-.gameboard-square:hover {
+.gameboard-square:hover,
+.restart-btn:hover {
     opacity: 90%;
     cursor: pointer;
 }
 
 .winner-txt {
     font-size: 50px;
+}
+
+.restart-btn {
+    border: none;
+    background-color: var(--medium-teal);
+    color: var(--peach);
+    padding: 7px 20px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.restart-btn:active {
+    opacity: 100%;
 }
