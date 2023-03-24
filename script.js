@@ -17,12 +17,10 @@ const gameboard = (() => {
 const Player = (symbol) => {
 
     const takeTurn = (e) => {
-        console.log(e.target.id);
-        // e.target.textContent = symbol;
         let i = e.target.id;
         gameboard.gameboardInput[i] = symbol;
         displayController.displayGameboard(gameboard.gameboardInput);
-    }
+    };
 
     return {
         takeTurn
@@ -38,9 +36,20 @@ const displayController = (() => {
             gameboardSquares[i].textContent = gameboardArray[i];
         }
     };
+    
+    let turn = 1;
+    const togglePlayer = (e) => {
+        if (turn == 1) {
+            player1.takeTurn(e);
+            turn = 2;
+        } else {
+            player2.takeTurn(e);
+            turn = 1;
+        }
+    }
 
     return {
-        displayGameboard
+        displayGameboard, togglePlayer
     };
 
 
@@ -50,7 +59,20 @@ const player1 = Player('X');
 const player2 = Player('O');
 
 // displayController.displayGameboard(gameboard.gameboardInput);
+// let turn = 1;
+// gameboardSquares.forEach((square) => {
+//     square.addEventListener('click', (e) => {
+//         if (turn == 1) {
+//             player1.takeTurn(e);
+//             turn = 2;
+//         } else {
+//             player2.takeTurn(e);
+//             turn = 1;
+//         }
+//     });
+// });
 
 gameboardSquares.forEach((square) => {
-    square.addEventListener('click', player2.takeTurn);
+    square.addEventListener('click', displayController.togglePlayer);
 });
+
