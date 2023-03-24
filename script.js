@@ -39,6 +39,10 @@ const displayController = (() => {
     
     let turn = 1;
     const togglePlayer = (e) => {
+        if (e.target.textContent) {
+            return;
+        }
+        
         if (turn == 1) {
             player1.takeTurn(e);
             turn = 2;
