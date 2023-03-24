@@ -1,5 +1,6 @@
 const gameboardContainer = document.getElementById("gameboard-container");
 const gameboardSquares = document.querySelectorAll(".gameboard-square");
+const winnerTxt = document.querySelector(".winner-txt");
 
 const gameboard = (() => {
 
@@ -24,8 +25,6 @@ const gameboard = (() => {
         [2, 4, 6]
     ]
 
-    let winner;
-
     const checkWinner = () => {
         for (i = 0; i < winningConditions.length; i++) {
 
@@ -36,18 +35,16 @@ const gameboard = (() => {
 
             if ((a == b && b == c) && a) {
                 if (a == 'X') {
-                    console.log('player 1 wins!!!');
-                    winner = 1;
+                    return 'Player 1 wins!!!';
                 } else {
-                    console.log('player 2 wins!!!!!');
-                    winner = 2;
+                    return 'Player 2 wins!!!';
                 }
             }
         }
     }
 
     return {
-        input, display, checkWinner, winner
+        input, display, checkWinner
     };
 
 
@@ -70,15 +67,10 @@ const Player = (symbol) => {
 
 const game = (() => {
 
-    // const displayGameboard = (gameboardArray) => {
-    //     for (i = 0; i < gameboardArray.length; i++) {
-    //         gameboardSquares[i].textContent = gameboardArray[i];
-    //     }
-    // };
-    
     let turn = 1;
+
     const play = (e) => {
-        if (e.target.textContent) {
+        if (e.target.textContent || winnerTxt.textContent) {
             return;
         }
 
@@ -90,7 +82,7 @@ const game = (() => {
             turn = 1;
         }
 
-        gameboard.checkWinner();
+        winnerTxt.textContent = gameboard.checkWinner();
     }
 
     return {
@@ -107,3 +99,20 @@ gameboardSquares.forEach((square) => {
     square.addEventListener('click', game.play);
 });
 
+// TO DO!!!!!
+
+// RE-ORGANIZE CODE
+
+// ADD LOGIC TO DISABLE INPUT AFTER SOMEONE WINS
+
+// ADD LOGIC TO CHECK FOR A TIE
+
+// ADD BUTTON TO LET PLAYERS ENTER NAMES
+
+// ADD BUTTON TO ALLOW YOU TO START/RESTART GAME
+
+// ADD UI TO CONGRADULATE WINNER
+
+// MAKE UI PRETTY
+
+// ADD AI
