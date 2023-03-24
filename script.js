@@ -14,12 +14,14 @@ const gameboard = (() => {
 
 })();
 
-const Player = (name, symbol) => {
+const Player = (symbol) => {
 
     const takeTurn = (e) => {
         console.log(e.target.id);
-        e.target.textContent = 'X';
-
+        // e.target.textContent = symbol;
+        let i = e.target.id;
+        gameboard.gameboardInput[i] = symbol;
+        displayController.displayGameboard(gameboard.gameboardInput);
     }
 
     return {
@@ -44,10 +46,11 @@ const displayController = (() => {
 
 })();
 
-const player1 = Player('Caylin', 'X');
+const player1 = Player('X');
+const player2 = Player('O');
 
-displayController.displayGameboard(gameboard.gameboardInput);
+// displayController.displayGameboard(gameboard.gameboardInput);
 
 gameboardSquares.forEach((square) => {
-    square.addEventListener('click', player1.takeTurn);
+    square.addEventListener('click', player2.takeTurn);
 });
