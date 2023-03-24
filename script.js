@@ -1,5 +1,6 @@
 const gameboardContainer = document.getElementById("gameboard-container");
 const gameboardSquares = document.querySelectorAll(".gameboard-square");
+const turnTxt = document.querySelector(".turn-txt");
 const winnerTxt = document.querySelector(".winner-txt");
 
 const gameboard = (() => {
@@ -34,6 +35,7 @@ const gameboard = (() => {
             let c = input[winCondition[2]];
 
             if ((a == b && b == c) && a) {
+                turnTxt.textContent = 'Congrats!';
                 if (a == 'X') {
                     return 'Player 1 wins!!!';
                 } else {
@@ -43,6 +45,7 @@ const gameboard = (() => {
         }
 
         if (input.length == 9 && !input.includes(undefined)) {
+            turnTxt.textContent = 'Bummer!';
             return "It's a tie!!!";
         }
     }
@@ -81,9 +84,11 @@ const game = (() => {
         if (turn == 1) {
             player1.takeTurn(e);
             turn = 2;
+            turnTxt.textContent = "It's player 2's turn!";
         } else {
             player2.takeTurn(e);
             turn = 1;
+            turnTxt.textContent = "It's player 1's turn!";
         }
 
         winnerTxt.textContent = gameboard.checkWinner();
