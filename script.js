@@ -41,6 +41,10 @@ const gameboard = (() => {
                 }
             }
         }
+
+        if (input.length == 9 && !input.includes(undefined)) {
+            return "It's a tie!!!";
+        }
     }
 
     return {
@@ -100,10 +104,6 @@ gameboardSquares.forEach((square) => {
 });
 
 // TO DO!!!!!
-
-// RE-ORGANIZE CODE
-
-// ADD LOGIC TO DISABLE INPUT AFTER SOMEONE WINS
 
 // ADD LOGIC TO CHECK FOR A TIE
 
