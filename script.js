@@ -3,7 +3,7 @@ const gameboardSquares = document.querySelectorAll(".gameboard-square");
 const turnTxt = document.querySelector(".turn-txt");
 const winnerTxt = document.querySelector(".winner-txt");
 const restartBtn = document.querySelector(".restart-btn");
-let turn = 1;
+// let turn = 1;
 
 const gameboard = (() => {
 
@@ -17,17 +17,17 @@ const gameboard = (() => {
         }
     };
 
-    const restart = () => {
-        input.length = 0;
-        gameboardSquares.forEach((square) => {
-            square.textContent = '';
-        });
+    // const restart = () => {
+    //     input.length = 0;
+    //     gameboardSquares.forEach((square) => {
+    //         square.textContent = '';
+    //     });
 
-        turnTxt.textContent = "It's player 1's turn! (X goes first)";
-        winnerTxt.textContent = '';
-        restartBtn.textContent = 'Restart Game';
-        turn = 1;
-    };
+    //     turnTxt.textContent = "It's player 1's turn! (X goes first)";
+    //     winnerTxt.textContent = '';
+    //     restartBtn.textContent = 'Restart Game';
+    //     turn = 1;
+    // };
 
     const winningConditions = [
         [0, 1, 2],
@@ -67,7 +67,7 @@ const gameboard = (() => {
     };
 
     return {
-        input, display, restart, checkWinner
+        input, display, checkWinner
     };
 
 
@@ -90,7 +90,7 @@ const Player = (symbol) => {
 
 const game = (() => {
 
-    // let turn = 1;
+    let turn = 1;
 
     const play = (e) => {
         if (e.target.textContent || winnerTxt.textContent) {
@@ -110,8 +110,20 @@ const game = (() => {
         winnerTxt.textContent = gameboard.checkWinner();
     }
 
+    const restart = () => {
+        gameboard.input.length = 0;
+        gameboardSquares.forEach((square) => {
+            square.textContent = '';
+        });
+
+        turnTxt.textContent = "It's player 1's turn! (X goes first)";
+        winnerTxt.textContent = '';
+        restartBtn.textContent = 'Restart Game';
+        turn = 1;
+    };
+
     return {
-        play
+        play, restart
     };
 
 
@@ -124,10 +136,12 @@ gameboardSquares.forEach((square) => {
     square.addEventListener('click', game.play);
 });
 
-restartBtn.addEventListener('click', gameboard.restart);
+restartBtn.addEventListener('click', game.restart);
 
 // TO DO!!!!!
 
 // MAYBE MOVE RESRTART FUNCTION TO GAME MODULE AND PUT TURN DECLARATION BACK THERE
+
+// Add footer
 
 // ADD AI
