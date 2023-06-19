@@ -3,11 +3,8 @@ const gameboardSquares = document.querySelectorAll(".gameboard-square");
 const turnTxt = document.querySelector(".turn-txt");
 const winnerTxt = document.querySelector(".winner-txt");
 const restartBtn = document.querySelector(".restart-btn");
-// let turn = 1;
 
 const gameboard = (() => {
-
-    // let input = ['X', 'X', 'X', 'O', 'O', 'O', 'Y', 'Y', 'Y'];
 
     let input = [];
 
@@ -16,18 +13,6 @@ const gameboard = (() => {
             gameboardSquares[i].textContent = input[i];
         }
     };
-
-    // const restart = () => {
-    //     input.length = 0;
-    //     gameboardSquares.forEach((square) => {
-    //         square.textContent = '';
-    //     });
-
-    //     turnTxt.textContent = "It's player 1's turn! (X goes first)";
-    //     winnerTxt.textContent = '';
-    //     restartBtn.textContent = 'Restart Game';
-    //     turn = 1;
-    // };
 
     const winningConditions = [
         [0, 1, 2],
@@ -138,10 +123,4 @@ gameboardSquares.forEach((square) => {
 
 restartBtn.addEventListener('click', game.restart);
 
-// TO DO!!!!!
-
-// MAYBE MOVE RESRTART FUNCTION TO GAME MODULE AND PUT TURN DECLARATION BACK THERE
-
-// Add footer
-
-// ADD AI
+// ADD AI???
